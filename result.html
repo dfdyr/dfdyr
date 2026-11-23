@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测试结果｜能量电量</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-4">
+<div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 text-center">
+  <h2 class="text-xl font-bold mb-4">🔋 你的能量电量</h2>
+  <div class="w-40 h-16 border-4 border-slate-700 rounded-xl mx-auto relative overflow-hidden my-6">
+    <div id="batteryFill" class="h-full transition-all duration-1000"></div>
+  </div>
+  <div class="text-4xl font-bold mb-4" id="perText"></div>
+  <div id="descBox" class="text-left bg-slate-50 p-4 rounded-xl mb-8"></div>
+  <a href="test.html" class="block w-full bg-teal-500 hover:bg-teal-600 text-white py-3 rounded-xl">重新测试</a>
+  <a href="index.html" class="block w-full mt-3 bg-slate-200 py-3 rounded-xl">返回首页</a>
+</div>
+<script>
+const params = new URLSearchParams(location.search);
+let p = Number(params.get('p'));
+if(isNaN(p)) p=50;
+
+let color, title, text;
+if(p >=80){
+  color = "#22c55e";
+  title = "满电状态🔋";
+  text = "精力充沛，行动力很强，愿意主动安排事情，不容易疲惫，对很多事抱有热情，可以大胆推进计划。";
+}else if(p >=60){
+  color = "#84cc16";
+  title = "电量充足😊";
+  text = "状态不错，大部分时候能完成计划，偶尔疲惫但恢复很快，有不错的积极性。";
+}else if(p >=40){
+  color = "#eab308";
+  title = "电量平稳😐";
+  text = "能量中等，需要刻意督促自己才能行动，容易间歇性想摆烂，压力一点点累积。";
+}else if(p >=20){
+  color = "#f97316";
+  title = "电量偏低😮‍💨";
+  text = "容易疲惫，提不起兴趣，很多事情想拖，社交和任务都会觉得消耗自己，需要多休息。";
+}else{
+  color = "#ef4444";
+  title = "电量告急🪫";
+  text = "内耗很重，很难调动积极性，哪怕小事也觉得很累，优先照顾自己，减少额外消耗。";
+}
+
+document.getElementById('batteryFill').style.width = p+"%";
+document.getElementById('batteryFill').style.backgroundColor = color;
+document.getElementById('perText').innerText = p + "%";
+document.getElementById('descBox').innerHTML = `<div class="font-bold text-lg mb-2">${title}</div><div>${text}</div>`;
+</script>
+</body>
+</html>

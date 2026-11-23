@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>能量电量测试</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-50 min-h-screen p-4">
+  <div class="max-w-md mx-auto bg-white rounded-2xl shadow p-6">
+    <div class="mb-4">
+      <div class="flex justify-between text-sm text-slate-500 mb-1">
+        <span>进度</span>
+        <span id="progressText">0 / 12</span>
+      </div>
+      <div class="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
+        <div id="progressBar" class="h-full bg-teal-500 w-0 transition-all"></div>
+      </div>
+    </div>
+
+    <div id="page1" class="q-page">
+      <div class="space-y-6">
+        <div class="q">
+          <p class="font-medium mb-2">1. 早上醒来之后，你的状态更接近？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q1" value="4"> A 很快清醒，期待今天</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q1" value="3"> B 慢慢醒，状态平稳</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q1" value="2"> C 不想起床，有点疲惫</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q1" value="1"> D 非常不想起来，只想躺着</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">2. 面对计划好要做的事，你的行动力？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q2" value="4"> A 说到尽量做到，主动推进</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q2" value="3"> B 正常完成，偶尔偷懒</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q2" value="2"> C 需要反复催促才愿意动</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q2" value="1"> D 一直拖延，很难开始</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">3. 最近专注做事的时候，容易分心吗？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q3" value="4"> A 很容易沉下心专注</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q3" value="3"> B 偶尔走神，可以拉回来</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q3" value="2"> C 经常走神，很难集中</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q3" value="1"> D 很难集中，看一会就累</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">4. 和别人社交之后，你的感受？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q4" value="4"> A 社交是开心充电</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q4" value="3"> B 正常，没有明显消耗</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q4" value="2"> C 社交会觉得有点累</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q4" value="1"> D 社交是巨大消耗，只想独处</label>
+        </div>
+      </div>
+      <div class="flex justify-end mt-6">
+        <button onclick="nextPage(1)" class="px-5 py-2 bg-teal-500 text-white rounded-xl">下一页</button>
+      </div>
+    </div>
+
+    <div id="page2" class="q-page hidden">
+      <div class="space-y-6">
+        <div class="q">
+          <p class="font-medium mb-2">5. 空闲的时候，你更想？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q5" value="4"> A 找点有意思的事做</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q5" value="3"> B 随便做点小事打发时间</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q5" value="2"> C 刷手机放空，不想动脑</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q5" value="1"> D 什么都不想干</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">6. 最近情绪起伏大不大？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q6" value="4"> A 情绪稳定，不容易内耗</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q6" value="3"> B 小幅波动，很快平复</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q6" value="2"> C 容易烦躁、胡思乱想</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q6" value="1"> D 经常低落，很难开心起来</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">7. 处理多个任务的时候？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q7" value="4"> A 可以从容安排</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q7" value="3"> B 能处理，有点压力</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q7" value="2"> C 忙起来就慌乱</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q7" value="1"> D 一点事情就觉得扛不住</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">8. 你的睡眠质量最近怎么样？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q8" value="4"> A 睡得踏实，睡醒很舒服</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q8" value="3"> B 睡得还行</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q8" value="2"> C 入睡难、容易醒</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q8" value="1"> D 长期睡不好，醒来依旧疲惫</label>
+        </div>
+      </div>
+      <div class="flex justify-between mt-6">
+        <button onclick="prevPage(2)" class="px-5 py-2 bg-slate-200 rounded-xl">上一页</button>
+        <button onclick="nextPage(2)" class="px-5 py-2 bg-teal-500 text-white rounded-xl">下一页</button>
+      </div>
+    </div>
+
+    <div id="page3" class="q-page hidden">
+      <div class="space-y-6">
+        <div class="q">
+          <p class="font-medium mb-2">9. 你愿意尝试新事情吗？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q9" value="4"> A 愿意，充满好奇</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q9" value="3"> B 看情况，感兴趣才试</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q9" value="2"> C 不太想折腾新东西</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q9" value="1"> D 完全不想尝试任何新事物</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">10. 疲惫之后恢复速度？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q10" value="4"> A 休息一会就能回血</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q10" value="3"> B 睡一觉基本恢复</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q10" value="2"> C 需要很久才能缓过来</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q10" value="1"> D 持续疲惫，休息也没用</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">11. 你对未来一段时间有没有期待感？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q11" value="4"> A 有很多期待和目标</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q11" value="3"> B 有一些小期待</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q11" value="2"> C 没什么特别期待</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q11" value="1"> D 觉得一切都无所谓</label>
+        </div>
+        <div class="q">
+          <p class="font-medium mb-2">12. 你会不会经常责怪自己、纠结已经发生的事？</p>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q12" value="4"> A 很少内耗自责</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q12" value="3"> B 偶尔会，很快放下</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q12" value="2"> C 经常反复回想纠结</label>
+          <label class="block p-2 border rounded-lg mb-2 cursor-pointer"><input type="radio" name="q12" value="1"> D 持续自我否定、内耗严重</label>
+        </div>
+      </div>
+      <div class="flex justify-between mt-6">
+        <button onclick="prevPage(3)" class="px-5 py-2 bg-slate-200 rounded-xl">上一页</button>
+        <button onclick="submitAll()" class="px-5 py-2 bg-teal-500 text-white rounded-xl">提交查看结果</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+let currentPage = 1;
+const totalQ = 12;
+
+function refreshProgress(){
+  let checked = document.querySelectorAll('input[type=radio]:checked').length;
+  document.getElementById('progressText').innerText = checked + " / " + totalQ;
+  document.getElementById('progressBar').style.width = (checked / totalQ *100)+"%";
+}
+document.querySelectorAll('input[type=radio]').forEach(el=>{
+  el.onchange = refreshProgress;
+})
+
+function hideAll(){
+  document.querySelectorAll('.q-page').forEach(p=>p.classList.add('hidden'))
+}
+function nextPage(p){
+  hideAll();
+  currentPage = p+1;
+  document.getElementById('page'+currentPage).classList.remove('hidden');
+}
+function prevPage(p){
+  hideAll();
+  currentPage = p-1;
+  document.getElementById('page'+currentPage).classList.remove('hidden');
+}
+
+function submitAll(){
+  let score = 0;
+  for(let i=1;i<=12;i++){
+    let v = document.querySelector('input[name="q'+i+'"]:checked');
+    if(!v){
+      alert("第"+i+"题还没有选择！");
+      return;
+    }
+    score += Number(v.value);
+  }
+  let percent = ((score -12)/(48-12)*100).toFixed(0);
+  window.location.href = "result.html?p="+percent;
+}
+refreshProgress();
+</script>
+</body>
+</html>
